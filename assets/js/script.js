@@ -50,7 +50,7 @@ $(document).ready(function () {
     $("form#contactForm").submit(function (event) {
         $.ajax({
             type: "POST",
-            url: "AJAX.php",
+            url: "response.php",
             dataType: "json",
             data: $(this).serializeArray(),
             success: function (response) {

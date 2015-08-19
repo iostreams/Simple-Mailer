@@ -17,23 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header('HTTP/1.1 405 Method Not Allowed');
-    header('Status: 405 Method Not Allowed');
-    header('Allow: POST');
-    exit;
+namespace Mailer\Response;
+
+/**
+ * Description of JSON
+ *
+ * @author ioerror
+ */
+final class Json extends \Mailer\Response\Response {
+
+    /**
+     *
+     * @return string JSON
+     */
+    public function getOutput() {
+        if (empty($this->errors)) {
+            $result = ['status' => 'ok', 'messages' => ['Wiadomość została wysłana']];
+        } else {
+            $result = ['status' => 'error', 'messages' => $this->errors, 'errorsIn' => $this->errorsIn];
+        }
+        return json_encode($result);
+    }
+
 }
-
-header('Content-Type: application/json; charset=UTF-8');
-
-require __DIR__ . '/app/config.php';
-require __DIR__ . '/app/Json.php';
-require __DIR__ . '/app/Mailer.php';
-
-$json = new \Mailer\Json();
-$result = $json->readData(array_merge($_POST, $TO_ADDRESS_NAME));
-if ($result) {
-    $json->process();
-}
-
-echo $json->getStatusAndMessages();

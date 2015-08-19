@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Mailer;
+namespace Mailer\Response;
 
 /**
- * Description of JSON
+ *
  *
  * @author ioerror
  */
-class Json {
+abstract class Response {
 
     /**
      * Mailer object
@@ -116,15 +116,7 @@ class Json {
 
     /**
      *
-     * @return string JSON
+     * @return string
      */
-    public function getStatusAndMessages() {
-        if (empty($this->errors)) {
-            $result = ['status' => 'ok', 'messages' => ['Wiadomość została wysłana']];
-        } else {
-            $result = ['status' => 'error', 'messages' => $this->errors, 'errorsIn' => $this->errorsIn];
-        }
-        return json_encode($result);
-    }
-
+    abstract public function getOutput();
 }

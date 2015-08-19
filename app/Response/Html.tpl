@@ -14,7 +14,7 @@
         <div class="container">
             <h2>Formularz kontaktowy</h2>
             <div id="alerts">
-                <div class="alert alert-danger" role="alert">Włącz w przeglądarce obsługe JavaScript</div>
+                <div class="alert alert-[@alertType]" role="alert">[@alertTxt]</div>
             </div>
             <form action="response.php" method="POST" id="contactForm">
                 <div class="form-group">
